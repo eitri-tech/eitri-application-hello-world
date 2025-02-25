@@ -13,10 +13,7 @@ export default function Error() {
       topInset
     >
       <GenericError
-        title = ""
-        bodyText = ""
-        retryButtonLabel = ""
-        onRetryPress={navigateToHome}
+        onRetryPress={navigateToHome} 
       />
     </Window>
   )
