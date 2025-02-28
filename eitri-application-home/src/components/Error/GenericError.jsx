@@ -9,7 +9,7 @@ import { Text, View, Touchable } from "eitri-luminus";
  */
 export default function GenericError(props) {
     const {
-        onRetryPress = null
+        onRetryPress = () => { console.log("onRetryPress not implemented") }
     } = props
 
     const [appSlug, setAppSlug] = useState('')
@@ -19,28 +19,21 @@ export default function GenericError(props) {
             const configs = await Eitri.getConfigs()
             setAppSlug(configs?.miniAppData?.slug)
         } catch (error) {
-            console.error("@Shared.GenericError.getConfigs", error)
+            console.error("@GenericError.getConfigs", error)
         }
     }
     getConfigs()
 
     function onCancelPress() {
-        Eitri.navigation.back()
+        Eitri.navigation.backToTop()
     }
 
-
-    const options = {
-        day: '2-digit',
-        month: '2-digit',
-        year: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        timeZone: 'America/Sao_Paulo',
-        hour12: false,
-    };
-
-    const formatter = new Intl.DateTimeFormat('pt-BR', options);
-    const formattedDateHour = formatter.format(new Date()).replace(',', ' às ').replace(' ', ' ');
+    const date = new Date(Date.now());
+    const formattedDateHour = new Intl.DateTimeFormat("pt-BR", {
+        dateStyle: "short",
+        timeStyle: "short",
+        timeZone: "America/Sao_Paulo",
+    }).format(date)
 
 
     return (
@@ -66,7 +59,7 @@ export default function GenericError(props) {
                         width='30%'
                         height='15vh'
                     >
-                        <Text fontSize="jumbo" fontWeight='bold' textAlign='center'>
+                        <Text customFontSize='90px' fontWeight='bold' textAlign='center'>
                             !
                         </Text>
                     </View>
