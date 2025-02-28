@@ -25,9 +25,6 @@ export default function Home(props) {
      * one below and track the log through your terminal.
      */
     console.log("This is an Eitri message", props);
-    Eitri.navigation.navigate({
-      path: 'Error',
-    })
   }, []);
 
   /**
